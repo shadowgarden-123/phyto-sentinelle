@@ -113,6 +113,11 @@ export default function AssistantScreen() {
           body: JSON.stringify({ messages: apiMessages }),
         });
 
+        // If the API route is missing (typical on static hosts like GitHub Pages)
+        if (response.status === 404) {
+          throw new Error('API_NOT_FOUND');
+        }
+
         const aiProvider = response.headers.get('X-AI-Provider') || 'unknown';
         setProvider(aiProvider);
 
@@ -148,14 +153,29 @@ export default function AssistantScreen() {
           { role: 'assistant', content: full, ts: Date.now(), provider: aiProvider },
         ]);
       } catch (err) {
-        toast.error("Erreur de connexion PALM'AI");
+        // Fallback to client-side engine if API is missing or fails
+        const { findOfflineResponse } = await import('@/lib/palmAiEngine');
+        const offlineText = findOfflineResponse(userText);
+        
+        setProvider('offline');
+        setStreamText('');
+        
+        // Simulate streaming for the offline response
+        let current = '';
+        const chars = offlineText.split('');
+        for (const char of chars) {
+          current += char;
+          setStreamText(current);
+          await new Promise(r => setTimeout(r, 5));
+        }
+
         setMessages((prev) => [
           ...prev,
           {
             role: 'assistant',
-            content: '⚠️ Erreur de connexion. Vérifiez votre réseau.',
+            content: offlineText,
             ts: Date.now(),
-            error: true,
+            provider: 'offline',
           },
         ]);
       } finally {
