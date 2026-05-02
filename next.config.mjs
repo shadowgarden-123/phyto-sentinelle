@@ -7,26 +7,30 @@ const ignoreEslintDuringBuilds = true;
 const nextConfig = {
   // Static export for GitHub Pages
   output: 'export',
-  // Disable image optimization (required for static export on GH Pages)
+  // Disable image optimization
   images: {
     unoptimized: true,
     remotePatterns: imageHosts,
     minimumCacheTTL: 60,
   },
-  // Ensure trailing slashes for correct static routing
+  // Ensure trailing slashes
   trailingSlash: true,
   // Base path for GitHub Pages
   basePath: '/phyto-sentinelle',
   
   productionBrowserSourceMaps: true,
-  distDir: process.env.DIST_DIR || '.next',
+  distDir: '.next',
 
   typescript: {
-    ignoreBuildErrors,
+    // !! WARN !! Dangerously allow production builds to successfully complete 
+    // even if your project has type errors.
+    ignoreBuildErrors: true,
   },
 
   eslint: {
-    ignoreDuringBuilds: ignoreEslintDuringBuilds,
+    // !! WARN !! Dangerously allow production builds to successfully complete 
+    // even if your project has ESLint errors.
+    ignoreDuringBuilds: true,
   },
 };
 export default nextConfig;
