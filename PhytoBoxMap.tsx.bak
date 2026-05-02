@@ -1,0 +1,124 @@
+'use client';
+
+import dynamic from 'next/dynamic';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PhytoBoxMap — Carte satellite Toumanguié
+// Chargée dynamiquement pour éviter les erreurs SSR de Leaflet
+// ─────────────────────────────────────────────────────────────────────────────
+
+const MapInner = dynamic(() => import('./MapInner'), {
+  ssr: false,
+  loading: () => (
+    <div
+      className="w-full h-full flex flex-col items-center justify-center"
+      style={{
+        background: '#FAFBFC',
+      }}
+    >
+      {/* Animated loader */}
+      <div className="relative flex items-center justify-center mb-6">
+        {/* Outer pulse rings */}
+        <div
+          className="absolute rounded-full animate-ping"
+          style={{
+            width: 80,
+            height: 80,
+            background: 'rgba(0,158,96,0.2)',
+            animationDuration: '1.5s',
+          }}
+        />
+        <div
+          className="absolute rounded-full animate-ping"
+          style={{
+            width: 56,
+            height: 56,
+            background: 'rgba(0,158,96,0.3)',
+            animationDuration: '1.5s',
+            animationDelay: '0.3s',
+          }}
+        />
+        {/* Icon */}
+        <div
+          className="relative z-10 flex items-center justify-center rounded-full"
+          style={{
+            width: 48,
+            height: 48,
+            background: 'linear-gradient(135deg, #009E60 0%, #007A4A 100%)',
+            boxShadow: '0 0 20px rgba(0,158,96,0.5)',
+          }}
+        >
+          <span style={{ fontSize: 22 }}>🌍</span>
+        </div>
+      </div>
+
+      {/* Text */}
+      <div className="text-center">
+        <div
+          className="text-sm font-bold tracking-widest uppercase"
+          style={{ color: '#009E60', letterSpacing: '0.2em' }}
+        >
+          PHYTOBOX · PALMCI
+        </div>
+        <div className="text-xs mt-1" style={{ color: '#5a6b5f' }}>
+          Chargement de la carte satellite...
+        </div>
+        <div
+          className="text-xs mt-0.5 font-mono"
+          style={{ color: '#6b7b6f' }}
+        >
+          5°22′02.03″N · 3°23′10.45″W · alt 45m
+        </div>
+      </div>
+
+      {/* Progress bar */}
+      <div
+        className="mt-6 rounded-full overflow-hidden"
+        style={{
+          width: 180,
+          height: 3,
+          background: '#e8ebe9',
+        }}
+      >
+        <div
+          style={{
+            height: '100%',
+            background: 'linear-gradient(90deg, #009E60, #F77F00)',
+            animation: 'phytoload 1.8s ease-in-out infinite',
+            borderRadius: 999,
+          }}
+        />
+      </div>
+
+      <style>{`
+        @keyframes phytoload {
+          0% { width: 0%; margin-left: 0%; }
+          50% { width: 70%; margin-left: 15%; }
+          100% { width: 0%; margin-left: 100%; }
+        }
+      `}</style>
+    </div>
+  ),
+});
+
+interface PhytoBoxMapProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export default function PhytoBoxMap({ className = '', style }: PhytoBoxMapProps) {
+  return (
+    <div
+      className={`relative overflow-hidden ${className}`}
+      style={{
+        background: '#ffffff',
+        borderRadius: 16,
+        border: '1px solid #d4e0d8',
+        boxShadow: '0 4px 16px rgba(0,0,0,0.08), 0 0 20px rgba(0,158,96,0.05)',
+        ...style,
+      }}
+    >
+      <MapInner />
+    </div>
+  );
+}

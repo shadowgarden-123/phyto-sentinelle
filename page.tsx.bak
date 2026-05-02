@@ -1,0 +1,72 @@
+import PhytoBoxMap from '@/components/map/PhytoBoxMap';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Page Carte — /carte  (ou /map)
+// Usage : ajoute cette page dans ton app router Next.js
+// ─────────────────────────────────────────────────────────────────────────────
+
+export default function CartePage() {
+  return (
+    <main
+      className="min-h-screen flex flex-col"
+      style={{
+        background: '#FAFBFC',
+        fontFamily: "'DM Sans', 'Segoe UI', sans-serif",
+      }}
+    >
+      {/* Top bar */}
+      <header
+        className="flex items-center justify-between px-6 py-3 flex-shrink-0"
+        style={{
+          background: '#ffffff',
+          borderBottom: '2px solid #009E60',
+          boxShadow: '0 2px 8px rgba(0,158,96,0.1)',
+        }}
+      >
+        <div className="flex items-center gap-3">
+          <div
+            className="w-8 h-8 rounded-lg flex items-center justify-center text-base"
+            style={{ background: 'linear-gradient(135deg,#009E60,#007A4A)' }}
+          >
+            🌴
+          </div>
+          <div>
+            <span className="font-bold text-sm" style={{ color: '#1a1a1a' }}>PhytoBox</span>
+            <span className="text-xs ml-2" style={{ color: '#5a6b5f' }}>
+              Surveillance phytosanitaire · Toumanguié, Côte d'Ivoire
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4">
+          {/* Live indicator */}
+          <div className="flex items-center gap-1.5">
+            <div
+              className="w-2 h-2 rounded-full animate-pulse"
+              style={{ background: '#009E60', boxShadow: '0 0 6px rgba(0,158,96,0.5)' }}
+            />
+            <span className="text-xs" style={{ color: '#009E60' }}>LIVE</span>
+          </div>
+          {/* Stats pills */}
+          <div
+            className="px-3 py-1 rounded-full text-xs font-medium"
+            style={{ background: '#fef2f2', color: '#ff4444', border: '1px solid #fecaca' }}
+          >
+            5 alertes critiques
+          </div>
+          <div
+            className="px-3 py-1 rounded-full text-xs font-medium"
+            style={{ background: '#fef3c7', color: '#F77F00', border: '1px solid #fcd34d' }}
+          >
+            8 en vigilance
+          </div>
+        </div>
+      </header>
+
+      {/* Map — flex-grow pour remplir l'écran */}
+      <div className="flex-1 p-4" style={{ minHeight: 0 }}>
+        <PhytoBoxMap className="w-full h-full" style={{ minHeight: 'calc(100vh - 100px)' }} />
+      </div>
+    </main>
+  );
+}

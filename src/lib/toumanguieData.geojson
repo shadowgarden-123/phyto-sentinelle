@@ -1,0 +1,485 @@
+{
+  "type": "FeatureCollection",
+  "name": "PhytoBox PALMCI – Données de test Toumanguié",
+  "metadata": {
+    "region": "Toumanguié",
+    "total_sentinelles": 21,
+    "alertes_critiques": 5,
+    "vigilance_orange": 8,
+    "saines": 8,
+    "date_generation": "2026-05-02"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-01-06",
+        "parcelle": "P01",
+        "type": "sentinelle",
+        "status": "critique",
+        "maladie_suspectee": "Ganoderma",
+        "risk_index": 82,
+        "cov_ppm": 845,
+        "acoustique": 5200,
+        "humidite_sol": 91,
+        "icon_color": "#F04444"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3880, 5.3615]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-01-11",
+        "parcelle": "P01",
+        "type": "sentinelle",
+        "status": "critique",
+        "maladie_suspectee": "Ganoderma",
+        "risk_index": 78,
+        "cov_ppm": 720,
+        "acoustique": 4800,
+        "humidite_sol": 88,
+        "icon_color": "#F04444"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3890, 5.3590]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-02-03",
+        "parcelle": "P02",
+        "type": "sentinelle",
+        "status": "critique",
+        "maladie_suspectee": "Phytophthora",
+        "risk_index": 85,
+        "cov_ppm": 920,
+        "acoustique": 3500,
+        "humidite_sol": 94,
+        "icon_color": "#F04444"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3855, 5.3625]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-02-07",
+        "parcelle": "P02",
+        "type": "sentinelle",
+        "status": "critique",
+        "maladie_suspectee": "Fusariose",
+        "risk_index": 80,
+        "cov_ppm": 680,
+        "acoustique": 4100,
+        "humidite_sol": 89,
+        "icon_color": "#F04444"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3840, 5.3625]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-02-12",
+        "parcelle": "P02",
+        "type": "sentinelle",
+        "status": "critique",
+        "maladie_suspectee": "Phytophthora",
+        "risk_index": 83,
+        "cov_ppm": 890,
+        "acoustique": 3800,
+        "humidite_sol": 92,
+        "icon_color": "#F04444"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3855, 5.3615]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-02-01",
+        "parcelle": "P02",
+        "type": "sentinelle",
+        "status": "orange",
+        "maladie_suspectee": null,
+        "risk_index": 55,
+        "cov_ppm": 420,
+        "acoustique": 2800,
+        "humidite_sol": 72,
+        "icon_color": "#F59820"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3845, 5.3630]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-02-05",
+        "parcelle": "P02",
+        "type": "sentinelle",
+        "status": "orange",
+        "maladie_suspectee": null,
+        "risk_index": 52,
+        "cov_ppm": 380,
+        "acoustique": 2600,
+        "humidite_sol": 68,
+        "icon_color": "#F59820"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3835, 5.3625]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-02-09",
+        "parcelle": "P02",
+        "type": "sentinelle",
+        "status": "orange",
+        "maladie_suspectee": null,
+        "risk_index": 58,
+        "cov_ppm": 450,
+        "acoustique": 3100,
+        "humidite_sol": 75,
+        "icon_color": "#F59820"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3850, 5.3615]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-02-15",
+        "parcelle": "P02",
+        "type": "sentinelle",
+        "status": "orange",
+        "maladie_suspectee": null,
+        "risk_index": 48,
+        "cov_ppm": 340,
+        "acoustique": 2400,
+        "humidite_sol": 65,
+        "icon_color": "#F59820"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3835, 5.3610]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-05-04",
+        "parcelle": "P05",
+        "type": "sentinelle",
+        "status": "orange",
+        "maladie_suspectee": null,
+        "risk_index": 60,
+        "cov_ppm": 520,
+        "acoustique": 2900,
+        "humidite_sol": 78,
+        "icon_color": "#F59820",
+        "note": "Lisière forêt"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3880, 5.3560]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-05-08",
+        "parcelle": "P05",
+        "type": "sentinelle",
+        "status": "orange",
+        "maladie_suspectee": null,
+        "risk_index": 56,
+        "cov_ppm": 480,
+        "acoustique": 2750,
+        "humidite_sol": 74,
+        "icon_color": "#F59820",
+        "note": "Lisière forêt"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3865, 5.3560]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-05-14",
+        "parcelle": "P05",
+        "type": "sentinelle",
+        "status": "orange",
+        "maladie_suspectee": null,
+        "risk_index": 54,
+        "cov_ppm": 440,
+        "acoustique": 2650,
+        "humidite_sol": 71,
+        "icon_color": "#F59820",
+        "note": "Lisière forêt"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3870, 5.3550]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-04-10",
+        "parcelle": "P04",
+        "type": "sentinelle",
+        "status": "orange",
+        "maladie_suspectee": null,
+        "risk_index": 50,
+        "cov_ppm": 360,
+        "acoustique": 2500,
+        "humidite_sol": 67,
+        "icon_color": "#F59820"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3850, 5.3580]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-03-00",
+        "parcelle": "P03",
+        "type": "sentinelle",
+        "status": "sain",
+        "maladie_suspectee": null,
+        "risk_index": 25,
+        "cov_ppm": 180,
+        "acoustique": 1200,
+        "humidite_sol": 45,
+        "icon_color": "#22c55e"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3890, 5.3600]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-03-04",
+        "parcelle": "P03",
+        "type": "sentinelle",
+        "status": "sain",
+        "maladie_suspectee": null,
+        "risk_index": 22,
+        "cov_ppm": 160,
+        "acoustique": 1100,
+        "humidite_sol": 42,
+        "icon_color": "#22c55e"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3880, 5.3590]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-03-08",
+        "parcelle": "P03",
+        "type": "sentinelle",
+        "status": "sain",
+        "maladie_suspectee": null,
+        "risk_index": 28,
+        "cov_ppm": 200,
+        "acoustique": 1350,
+        "humidite_sol": 48,
+        "icon_color": "#22c55e"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3870, 5.3585]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-06-02",
+        "parcelle": "P06",
+        "type": "sentinelle",
+        "status": "sain",
+        "maladie_suspectee": null,
+        "risk_index": 20,
+        "cov_ppm": 140,
+        "acoustique": 1050,
+        "humidite_sol": 40,
+        "icon_color": "#22c55e"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3845, 5.3565]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-06-06",
+        "parcelle": "P06",
+        "type": "sentinelle",
+        "status": "sain",
+        "maladie_suspectee": null,
+        "risk_index": 24,
+        "cov_ppm": 175,
+        "acoustique": 1180,
+        "humidite_sol": 44,
+        "icon_color": "#22c55e"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3835, 5.3560]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-07-03",
+        "parcelle": "P07",
+        "type": "sentinelle",
+        "status": "sain",
+        "maladie_suspectee": null,
+        "risk_index": 18,
+        "cov_ppm": 130,
+        "acoustique": 980,
+        "humidite_sol": 38,
+        "icon_color": "#22c55e"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3880, 5.3535]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-08-01",
+        "parcelle": "P08",
+        "type": "sentinelle",
+        "status": "sain",
+        "maladie_suspectee": null,
+        "risk_index": 26,
+        "cov_ppm": 190,
+        "acoustique": 1280,
+        "humidite_sol": 46,
+        "icon_color": "#22c55e"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3835, 5.3535]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SENT-08-05",
+        "parcelle": "P08",
+        "type": "sentinelle",
+        "status": "sain",
+        "maladie_suspectee": null,
+        "risk_index": 23,
+        "cov_ppm": 165,
+        "acoustique": 1150,
+        "humidite_sol": 43,
+        "icon_color": "#22c55e"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.3845, 5.3525]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "P01",
+        "type": "parcelle",
+        "nom": "Bordure Rivière",
+        "status": "normal",
+        "superficie_ha": 45.5,
+        "nb_palmiers": 910,
+        "fill_color": "rgba(34,197,94,0.3)",
+        "stroke_color": "#22c55e"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-3.389, 5.363],
+          [-3.386, 5.363],
+          [-3.386, 5.360],
+          [-3.389, 5.360],
+          [-3.389, 5.363]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "P02",
+        "type": "parcelle",
+        "nom": "Bas-Fond Humide (zone critique)",
+        "status": "critique",
+        "superficie_ha": 38.2,
+        "nb_palmiers": 764,
+        "fill_color": "rgba(240,68,68,0.3)",
+        "stroke_color": "#F04444"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-3.386, 5.363],
+          [-3.383, 5.363],
+          [-3.383, 5.360],
+          [-3.386, 5.360],
+          [-3.386, 5.363]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "P05",
+        "type": "parcelle",
+        "nom": "Lisière Forêt (zone vigilance)",
+        "status": "warning",
+        "superficie_ha": 52.8,
+        "nb_palmiers": 1056,
+        "fill_color": "rgba(245,152,32,0.3)",
+        "stroke_color": "#F59820"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-3.389, 5.357],
+          [-3.386, 5.357],
+          [-3.386, 5.354],
+          [-3.389, 5.354],
+          [-3.389, 5.357]
+        ]]
+      }
+    }
+  ]
+}

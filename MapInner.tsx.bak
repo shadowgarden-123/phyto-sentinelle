@@ -1,0 +1,421 @@
+'use client';
+
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  ZoomControl,
+  LayersControl,
+  Circle,
+} from 'react-leaflet';
+import { useEffect, useState } from 'react';
+
+// ─── Coordonnées exactes Toumanguié ─────────────────────────────────────────
+// 5°22'02.03"N  3°23'10.45"W  alt 45 m
+const TOUMANGUIE_CENTER: [number, number] = [5.367231, -3.386236];
+const INITIAL_ZOOM = 16;
+
+// ─── Données sentinelles (extraites du seed.sql) ─────────────────────────────
+const SENTINELLES = [
+  // Critiques
+  { code: 'SENT-01-06', parcelle: 'P01', status: 'critique', maladie: 'Ganoderma',      lat: 5.3615, lng: -3.3880, risk: 82, cov: 845,  ac: 5200, hum: 91 },
+  { code: 'SENT-01-11', parcelle: 'P01', status: 'critique', maladie: 'Ganoderma',      lat: 5.3590, lng: -3.3890, risk: 78, cov: 720,  ac: 4800, hum: 88 },
+  { code: 'SENT-02-03', parcelle: 'P02', status: 'critique', maladie: 'Phytophthora',   lat: 5.3625, lng: -3.3855, risk: 85, cov: 920,  ac: 3500, hum: 94 },
+  { code: 'SENT-02-07', parcelle: 'P02', status: 'critique', maladie: 'Fusariose',      lat: 5.3625, lng: -3.3840, risk: 80, cov: 680,  ac: 4100, hum: 89 },
+  { code: 'SENT-02-12', parcelle: 'P02', status: 'critique', maladie: 'Phytophthora',   lat: 5.3615, lng: -3.3855, risk: 83, cov: 890,  ac: 3800, hum: 92 },
+  // Orange
+  { code: 'SENT-02-01', parcelle: 'P02', status: 'orange',   maladie: null,             lat: 5.3630, lng: -3.3845, risk: 55, cov: 420,  ac: 2800, hum: 72 },
+  { code: 'SENT-02-05', parcelle: 'P02', status: 'orange',   maladie: null,             lat: 5.3625, lng: -3.3835, risk: 52, cov: 380,  ac: 2600, hum: 68 },
+  { code: 'SENT-02-09', parcelle: 'P02', status: 'orange',   maladie: null,             lat: 5.3615, lng: -3.3850, risk: 58, cov: 450,  ac: 3100, hum: 75 },
+  { code: 'SENT-02-15', parcelle: 'P02', status: 'orange',   maladie: null,             lat: 5.3610, lng: -3.3835, risk: 48, cov: 340,  ac: 2400, hum: 65 },
+  { code: 'SENT-05-04', parcelle: 'P05', status: 'orange',   maladie: null,             lat: 5.3560, lng: -3.3880, risk: 60, cov: 520,  ac: 2900, hum: 78 },
+  { code: 'SENT-05-08', parcelle: 'P05', status: 'orange',   maladie: null,             lat: 5.3560, lng: -3.3865, risk: 56, cov: 480,  ac: 2750, hum: 74 },
+  { code: 'SENT-05-14', parcelle: 'P05', status: 'orange',   maladie: null,             lat: 5.3550, lng: -3.3870, risk: 54, cov: 440,  ac: 2650, hum: 71 },
+  { code: 'SENT-04-10', parcelle: 'P04', status: 'orange',   maladie: null,             lat: 5.3580, lng: -3.3850, risk: 50, cov: 360,  ac: 2500, hum: 67 },
+  // Sains
+  { code: 'SENT-03-00', parcelle: 'P03', status: 'sain',     maladie: null,             lat: 5.3600, lng: -3.3890, risk: 25, cov: 180,  ac: 1200, hum: 45 },
+  { code: 'SENT-03-04', parcelle: 'P03', status: 'sain',     maladie: null,             lat: 5.3590, lng: -3.3880, risk: 22, cov: 160,  ac: 1100, hum: 42 },
+  { code: 'SENT-03-08', parcelle: 'P03', status: 'sain',     maladie: null,             lat: 5.3585, lng: -3.3870, risk: 28, cov: 200,  ac: 1350, hum: 48 },
+  { code: 'SENT-06-02', parcelle: 'P06', status: 'sain',     maladie: null,             lat: 5.3565, lng: -3.3845, risk: 20, cov: 140,  ac: 1050, hum: 40 },
+  { code: 'SENT-06-06', parcelle: 'P06', status: 'sain',     maladie: null,             lat: 5.3560, lng: -3.3835, risk: 24, cov: 175,  ac: 1180, hum: 44 },
+  { code: 'SENT-07-03', parcelle: 'P07', status: 'sain',     maladie: null,             lat: 5.3535, lng: -3.3880, risk: 18, cov: 130,  ac: 980,  hum: 38 },
+  { code: 'SENT-08-01', parcelle: 'P08', status: 'sain',     maladie: null,             lat: 5.3535, lng: -3.3835, risk: 26, cov: 190,  ac: 1280, hum: 46 },
+  { code: 'SENT-08-05', parcelle: 'P08', status: 'sain',     maladie: null,             lat: 5.3525, lng: -3.3845, risk: 23, cov: 165,  ac: 1150, hum: 43 },
+];
+
+// ─── Couleurs par statut ──────────────────────────────────────────────────────
+const STATUS_CONFIG = {
+  critique: { color: '#ff4444', glow: 'rgba(255,68,68,0.4)',  label: 'Critique',   bg: '#ff44441a' },
+  orange:   { color: '#F77F00', glow: 'rgba(247,127,0,0.4)', label: 'Vigilance',  bg: '#F77F001a' },
+  sain:     { color: '#009E60', glow: 'rgba(0,158,96,0.4)',  label: 'Sain',       bg: '#009E601a' },
+};
+
+// ─── Icône SVG personnalisée ──────────────────────────────────────────────────
+function makeIcon(status: keyof typeof STATUS_CONFIG, isPulsing = false) {
+  const { color } = STATUS_CONFIG[status];
+  const pulse = isPulsing
+    ? `<circle cx="12" cy="12" r="10" fill="${color}" opacity="0.25">
+        <animate attributeName="r" from="8" to="16" dur="1.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" from="0.4" to="0" dur="1.5s" repeatCount="indefinite"/>
+       </circle>`
+    : '';
+
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="36" viewBox="0 0 28 36">
+      <defs>
+        <filter id="shadow">
+          <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="${color}" flood-opacity="0.5"/>
+        </filter>
+      </defs>
+      ${pulse}
+      <path d="M14 0C6.27 0 0 6.27 0 14c0 10.5 14 22 14 22S28 24.5 28 14C28 6.27 21.73 0 14 0z"
+            fill="${color}" filter="url(#shadow)"/>
+      <circle cx="14" cy="13" r="6" fill="white" opacity="0.9"/>
+      <circle cx="14" cy="13" r="3.5" fill="${color}"/>
+    </svg>`;
+
+  return L.divIcon({
+    html: svg,
+    className: '',
+    iconSize: [28, 36],
+    iconAnchor: [14, 36],
+    popupAnchor: [0, -36],
+  });
+}
+
+// ─── Composant principal ──────────────────────────────────────────────────────
+export default function MapInner() {
+  const [selected, setSelected] = useState<(typeof SENTINELLES)[0] | null>(null);
+  const [mapReady, setMapReady] = useState(false);
+
+  useEffect(() => {
+    // Fix Leaflet default icon path issues in Next.js
+    delete (L.Icon.Default.prototype as any)._getIconUrl;
+    L.Icon.Default.mergeOptions({
+      iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+      iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+    });
+    setMapReady(true);
+  }, []);
+
+  if (!mapReady) return null;
+
+  const counts = {
+    critique: SENTINELLES.filter(s => s.status === 'critique').length,
+    orange: SENTINELLES.filter(s => s.status === 'orange').length,
+    sain: SENTINELLES.filter(s => s.status === 'sain').length,
+  };
+
+  return (
+    <div className="relative w-full h-full">
+      <MapContainer
+        center={TOUMANGUIE_CENTER}
+        zoom={INITIAL_ZOOM}
+        zoomControl={false}
+        className="w-full h-full"
+        style={{ background: '#f8faf9' }}
+      >
+        <ZoomControl position="bottomright" />
+
+        <LayersControl position="topright">
+          {/* Satellite Google Earth-like (Esri) */}
+          <LayersControl.BaseLayer checked name="🛰️ Satellite (Esri)">
+            <TileLayer
+              url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+              attribution='&copy; <a href="https://www.esri.com">Esri</a>, Maxar, Earthstar Geographics'
+              maxZoom={20}
+            />
+          </LayersControl.BaseLayer>
+
+          {/* Satellite + Labels */}
+          <LayersControl.BaseLayer name="🛰️ Satellite + Labels">
+            <TileLayer
+              url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+              attribution='&copy; Esri'
+              maxZoom={20}
+            />
+          </LayersControl.BaseLayer>
+
+          {/* Google Satellite via proxy */}
+          <LayersControl.BaseLayer name="🌍 Google Earth">
+            <TileLayer
+              url="https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
+              attribution='&copy; Google'
+              maxZoom={20}
+            />
+          </LayersControl.BaseLayer>
+
+          {/* OSM classique */}
+          <LayersControl.BaseLayer name="🗺️ Carte classique">
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; OpenStreetMap contributors'
+            />
+          </LayersControl.BaseLayer>
+        </LayersControl>
+
+        {/* Cercles de zone d'influence */}
+        {SENTINELLES.map(s => (
+          <Circle
+            key={`circle-${s.code}`}
+            center={[s.lat, s.lng]}
+            radius={80}
+            pathOptions={{
+              color: STATUS_CONFIG[s.status as keyof typeof STATUS_CONFIG].color,
+              fillColor: STATUS_CONFIG[s.status as keyof typeof STATUS_CONFIG].color,
+              fillOpacity: s.status === 'critique' ? 0.18 : 0.08,
+              weight: s.status === 'critique' ? 2 : 1,
+              opacity: 0.6,
+              dashArray: s.status === 'orange' ? '4 4' : undefined,
+            }}
+          />
+        ))}
+
+        {/* Marqueurs sentinelles */}
+        {SENTINELLES.map(s => (
+          <Marker
+            key={s.code}
+            position={[s.lat, s.lng]}
+            icon={makeIcon(
+              s.status as keyof typeof STATUS_CONFIG,
+              s.status === 'critique'
+            )}
+            eventHandlers={{ click: () => setSelected(s) }}
+          >
+            <Popup
+              className="phytobox-popup"
+              maxWidth={280}
+            >
+              <PopupContent s={s} />
+            </Popup>
+          </Marker>
+        ))}
+      </MapContainer>
+
+      {/* ── HUD Haut gauche : titre + stats ── */}
+      <div
+        className="absolute top-4 left-4 z-[1000] pointer-events-none"
+        style={{ maxWidth: 260 }}
+      >
+        <div
+          className="rounded-xl overflow-hidden"
+          style={{
+            background: '#ffffff',
+            border: '1px solid #d4e0d8',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.08), 0 0 20px rgba(0,158,96,0.05)',
+          }}
+        >
+          {/* Header */}
+          <div
+            className="px-4 py-3 flex items-center gap-2"
+            style={{ background: 'linear-gradient(135deg,#009E60 0%,#007A4A 100%)' }}
+          >
+            <span style={{ fontSize: 20 }}>🌴</span>
+            <div>
+              <div className="text-white font-bold text-sm leading-tight tracking-wide">PHYTOBOX</div>
+              <div className="text-green-100 text-xs opacity-90">PALMCI · Toumanguié</div>
+            </div>
+          </div>
+
+          {/* Coords */}
+          <div className="px-4 py-2 border-b" style={{ borderColor: '#d4e0d8' }}>
+            <div className="text-xs font-mono" style={{ color: '#009E60' }}>
+              5°22′02.03″N · 3°23′10.45″W
+            </div>
+            <div className="text-xs" style={{ color: '#5a6b5f' }}>alt. 45 m · Zone Toumanguié</div>
+          </div>
+
+          {/* Stats */}
+          <div className="px-4 py-3 grid grid-cols-3 gap-2">
+            {[
+              { label: 'Critiques', val: counts.critique, color: '#ff4444' },
+              { label: 'Vigilance', val: counts.orange,   color: '#F77F00' },
+              { label: 'Saines',    val: counts.sain,     color: '#009E60' },
+            ].map(({ label, val, color }) => (
+              <div key={label} className="text-center">
+                <div className="text-xl font-bold" style={{ color }}>{val}</div>
+                <div className="text-xs" style={{ color: '#5a6b5f' }}>{label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Légende bas gauche ── */}
+      <div
+        className="absolute bottom-8 left-4 z-[1000]"
+        style={{
+          background: '#ffffff',
+          border: '1px solid #d4e0d8',
+          borderRadius: 10,
+          padding: '10px 14px',
+          minWidth: 150,
+          boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+        }}
+      >
+        <div className="text-xs font-semibold mb-2" style={{ color: '#5a6b5f', letterSpacing: '0.08em' }}>
+          LÉGENDE
+        </div>
+        {Object.entries(STATUS_CONFIG).map(([key, cfg]) => (
+          <div key={key} className="flex items-center gap-2 mb-1">
+            <div
+              className="w-3 h-3 rounded-full flex-shrink-0"
+              style={{ background: cfg.color, boxShadow: `0 0 6px ${cfg.glow}` }}
+            />
+            <span className="text-xs" style={{ color: '#1a1a1a' }}>
+              PhytoBox {cfg.label}
+            </span>
+          </div>
+        ))}
+        <div className="flex items-center gap-2 mt-2 pt-2" style={{ borderTop: '1px solid #e8ebe9' }}>
+          <div
+            className="w-3 h-3 rounded-full flex-shrink-0 border"
+            style={{ borderColor: '#F77F00', borderStyle: 'dashed', borderWidth: 1.5, background: 'transparent' }}
+          />
+          <span className="text-xs" style={{ color: '#1a1a1a' }}>Zone d'influence (80m)</span>
+        </div>
+      </div>
+
+      {/* ── Badge altitude haut droit ── */}
+      <div
+        className="absolute top-4 right-16 z-[1000]"
+        style={{
+          background: '#ffffff',
+          border: '1px solid #d4e0d8',
+          borderRadius: 8,
+          padding: '6px 12px',
+          fontSize: 11,
+          color: '#5a6b5f',
+          fontFamily: 'monospace',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+        }}
+      >
+        ↑ 45 m · Lat 5.3672° N · Lng 3.3862° W
+      </div>
+
+      {/* CSS pour les popups Leaflet */}
+      <style>{`
+        .phytobox-popup .leaflet-popup-content-wrapper {
+          background: #ffffff;
+          border: 1px solid #d4e0d8;
+          border-radius: 12px;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+          padding: 0;
+          overflow: hidden;
+        }
+        .phytobox-popup .leaflet-popup-tip {
+          background: #ffffff;
+          border: 1px solid #d4e0d8;
+        }
+        .phytobox-popup .leaflet-popup-content {
+          margin: 0;
+          min-width: 220px;
+        }
+        .phytobox-popup .leaflet-popup-close-button {
+          color: #5a6b5f !important;
+          top: 8px !important;
+          right: 10px !important;
+          font-size: 18px !important;
+        }
+        .phytobox-popup .leaflet-popup-close-button:hover {
+          color: #1a1a1a !important;
+        }
+      `}</style>
+    </div>
+  );
+}
+
+// ─── Popup content ─────────────────────────────────────────────────────────
+function PopupContent({ s }: { s: (typeof SENTINELLES)[0] }) {
+  const cfg = STATUS_CONFIG[s.status as keyof typeof STATUS_CONFIG];
+  const riskPct = s.risk;
+
+  return (
+    <div>
+      {/* Header */}
+      <div
+        className="px-4 py-3 flex items-center justify-between"
+        style={{
+          background: `${cfg.color}10`,
+          borderBottom: `1px solid ${cfg.color}30`,
+        }}
+      >
+        <div>
+          <div className="font-bold text-sm" style={{ color: '#1a1a1a' }}>{s.code}</div>
+          <div className="text-xs" style={{ color: '#5a6b5f' }}>Parcelle {s.parcelle}</div>
+        </div>
+        <div
+          className="px-2 py-1 rounded text-xs font-bold"
+          style={{ background: `${cfg.color}15`, color: cfg.color, border: `1px solid ${cfg.color}40` }}
+        >
+          {cfg.label.toUpperCase()}
+        </div>
+      </div>
+
+      {/* Body */}
+      <div className="px-4 py-3">
+        {/* Risk index */}
+        <div className="mb-3">
+          <div className="flex justify-between mb-1">
+            <span className="text-xs" style={{ color: '#5a6b5f' }}>Risk Index</span>
+            <span className="text-xs font-bold" style={{ color: cfg.color }}>{riskPct}/100</span>
+          </div>
+          <div className="h-1.5 rounded-full" style={{ background: '#e8ebe9' }}>
+            <div
+              className="h-full rounded-full transition-all"
+              style={{
+                width: `${riskPct}%`,
+                background: `linear-gradient(90deg, #009E60, ${cfg.color})`,
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Metrics grid */}
+        <div className="grid grid-cols-3 gap-2 mb-3">
+          {[
+            { label: 'COV', val: s.cov, unit: 'ppm' },
+            { label: 'Acous.', val: s.ac, unit: 'Hz' },
+            { label: 'Humidité', val: s.hum, unit: '%' },
+          ].map(({ label, val, unit }) => (
+            <div
+              key={label}
+              className="rounded-lg px-2 py-2 text-center"
+              style={{ background: '#f8faf9', border: '1px solid #e8ebe9' }}
+            >
+              <div className="text-xs font-bold" style={{ color: '#1a1a1a' }}>{val}</div>
+              <div className="text-xs" style={{ color: '#5a6b5f' }}>{unit}</div>
+              <div className="text-xs" style={{ color: '#6b7b6f', fontSize: 9 }}>{label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Maladie */}
+        {s.maladie && (
+          <div
+            className="flex items-center gap-2 px-3 py-2 rounded-lg"
+            style={{ background: '#fef2f2', border: '1px solid #fecaca' }}
+          >
+            <span>⚠️</span>
+            <div>
+              <div className="text-xs font-semibold" style={{ color: '#1a1a1a' }}>Maladie suspectée</div>
+              <div className="text-xs font-bold" style={{ color: '#ff4444' }}>{s.maladie}</div>
+            </div>
+          </div>
+        )}
+
+        {/* Coords */}
+        <div
+          className="mt-2 px-2 py-1 rounded font-mono text-xs"
+          style={{ background: '#f8faf9', color: '#5a6b5f', border: '1px solid #e8ebe9' }}
+        >
+          {s.lat.toFixed(4)}°N · {Math.abs(s.lng).toFixed(4)}°W
+        </div>
+      </div>
+    </div>
+  );
+}
