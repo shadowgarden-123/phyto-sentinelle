@@ -96,26 +96,17 @@ const HighContrastTooltip = ({ active, payload, label }: any) => {
           boxShadow: HIGH_CONTRAST_COLORS.shadowLg,
         }}
       >
-        <p 
-          className="font-bold mb-2 text-base"
-          style={{ color: HIGH_CONTRAST_COLORS.textPrimary }}
-        >
+        <p className="font-bold mb-2 text-base" style={{ color: HIGH_CONTRAST_COLORS.textPrimary }}>
           {label}
         </p>
         {payload.map((entry: any, index: number) => (
-          <p 
-            key={index} 
+          <p
+            key={index}
             className="flex items-center gap-2 font-semibold"
             style={{ color: entry.color }}
           >
-            <span 
-              className="w-3 h-3 rounded-full"
-              style={{ background: entry.color }} 
-            />
-            {entry.name}: 
-            <span className="font-black text-base">
-              {entry.value}
-            </span>
+            <span className="w-3 h-3 rounded-full" style={{ background: entry.color }} />
+            {entry.name}:<span className="font-black text-base">{entry.value}</span>
           </p>
         ))}
       </div>
@@ -137,14 +128,11 @@ export function DiseaseDistributionChart({ data }: { data: DiseaseData[] }) {
     <div className="p-5" style={CARD_STYLE}>
       <div className="flex items-center gap-2 mb-4">
         <Activity className="w-5 h-5" style={{ color: CHART_COLORS.primary }} />
-        <h3 
-          className="font-bold text-lg"
-          style={{ color: CHART_COLORS.text }}
-        >
+        <h3 className="font-bold text-lg" style={{ color: CHART_COLORS.text }}>
           Répartition des maladies
         </h3>
       </div>
-      
+
       <div className="flex items-center gap-6">
         <div className="w-36 h-36 relative">
           <ResponsiveContainer width="100%" height="100%">
@@ -174,13 +162,10 @@ export function DiseaseDistributionChart({ data }: { data: DiseaseData[] }) {
           {/* Centre avec total */}
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
-              <span 
-                className="text-2xl font-black"
-                style={{ color: CHART_COLORS.text }}
-              >
+              <span className="text-2xl font-black" style={{ color: CHART_COLORS.text }}>
                 {chartData.reduce((a, b) => a + b.value, 0)}
               </span>
-              <span 
+              <span
                 className="block text-xs font-bold"
                 style={{ color: CHART_COLORS.textSecondary }}
               >
@@ -189,29 +174,29 @@ export function DiseaseDistributionChart({ data }: { data: DiseaseData[] }) {
             </div>
           </div>
         </div>
-        
+
         <div className="flex-1 space-y-3">
           {data.map((d, i) => (
             <div key={i}>
               <div className="flex items-center justify-between mb-1">
-                <span 
+                <span
                   className="text-sm font-bold flex items-center gap-2"
                   style={{ color: CHART_COLORS.text }}
                 >
-                  <span
-                    className="w-3 h-3 rounded-full"
-                    style={{ background: d.color }}
-                  />
+                  <span className="w-3 h-3 rounded-full" style={{ background: d.color }} />
                   {d.name}
                 </span>
-                <span 
-                  className="text-sm font-black"
-                  style={{ color: d.color }}
-                >
-                  {d.count} <span className="text-xs font-semibold" style={{ color: CHART_COLORS.textSecondary }}>({d.pct}%)</span>
+                <span className="text-sm font-black" style={{ color: d.color }}>
+                  {d.count}{' '}
+                  <span
+                    className="text-xs font-semibold"
+                    style={{ color: CHART_COLORS.textSecondary }}
+                  >
+                    ({d.pct}%)
+                  </span>
                 </span>
               </div>
-              <div 
+              <div
                 className="h-2.5 rounded-full overflow-hidden"
                 style={{ background: HIGH_CONTRAST_COLORS.backgroundSecondary }}
               >
@@ -238,38 +223,26 @@ export function WeeklyAlertsChart({ data }: { data: AlertData[] }) {
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
           <AlertTriangle className="w-5 h-5" style={{ color: CHART_COLORS.danger }} />
-          <h3 
-            className="font-bold text-lg"
-            style={{ color: CHART_COLORS.text }}
-          >
+          <h3 className="font-bold text-lg" style={{ color: CHART_COLORS.text }}>
             Alertes — 7 derniers jours
           </h3>
         </div>
         <div className="flex items-center gap-4 text-sm font-bold">
           <span className="flex items-center gap-1.5">
-            <span 
-              className="w-3 h-3 rounded"
-              style={{ background: CHART_COLORS.danger }} 
-            />
+            <span className="w-3 h-3 rounded" style={{ background: CHART_COLORS.danger }} />
             <span style={{ color: CHART_COLORS.danger }}>Nouvelles</span>
           </span>
           <span className="flex items-center gap-1.5">
-            <span 
-              className="w-3 h-3 rounded"
-              style={{ background: CHART_COLORS.success }} 
-            />
+            <span className="w-3 h-3 rounded" style={{ background: CHART_COLORS.success }} />
             <span style={{ color: CHART_COLORS.success }}>Résolues</span>
           </span>
           <span className="flex items-center gap-1.5">
-            <span 
-              className="w-3 h-3 rounded"
-              style={{ background: CHART_COLORS.warning }} 
-            />
+            <span className="w-3 h-3 rounded" style={{ background: CHART_COLORS.warning }} />
             <span style={{ color: CHART_COLORS.warning }}>Critiques</span>
           </span>
         </div>
       </div>
-      
+
       <div className="h-40">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} barGap={4}>
@@ -283,17 +256,17 @@ export function WeeklyAlertsChart({ data }: { data: AlertData[] }) {
               dataKey="day"
               axisLine={{ stroke: CHART_COLORS.grid, strokeWidth: 2 }}
               tickLine={{ stroke: CHART_COLORS.grid, strokeWidth: 2 }}
-              tick={{ 
-                fill: CHART_COLORS.textSecondary, 
+              tick={{
+                fill: CHART_COLORS.textSecondary,
                 fontSize: 12,
                 fontWeight: 600,
               }}
             />
-            <YAxis 
+            <YAxis
               axisLine={false}
               tickLine={false}
-              tick={{ 
-                fill: CHART_COLORS.textSecondary, 
+              tick={{
+                fill: CHART_COLORS.textSecondary,
                 fontSize: 11,
                 fontWeight: 600,
               }}
@@ -338,14 +311,11 @@ export function SiteRiskChart({ data }: { data: SiteRiskData[] }) {
     <div className="p-5" style={CARD_STYLE}>
       <div className="flex items-center gap-2 mb-4">
         <TrendingUp className="w-5 h-5" style={{ color: CHART_COLORS.warning }} />
-        <h3 
-          className="font-bold text-lg"
-          style={{ color: CHART_COLORS.text }}
-        >
+        <h3 className="font-bold text-lg" style={{ color: CHART_COLORS.text }}>
           Risque par site
         </h3>
       </div>
-      
+
       <div className="h-44">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
@@ -365,38 +335,29 @@ export function SiteRiskChart({ data }: { data: SiteRiskData[] }) {
               dataKey="site"
               axisLine={{ stroke: CHART_COLORS.grid, strokeWidth: 2 }}
               tickLine={{ stroke: CHART_COLORS.grid, strokeWidth: 2 }}
-              tick={{ 
-                fill: CHART_COLORS.text, 
+              tick={{
+                fill: CHART_COLORS.text,
                 fontSize: 12,
                 fontWeight: 700,
               }}
               width={75}
             />
             <Tooltip content={<HighContrastTooltip />} />
-            <Bar
-              dataKey="risk"
-              name="Risque %"
-              radius={[0, 6, 6, 0]}
-              strokeWidth={2}
-            >
+            <Bar dataKey="risk" name="Risque %" radius={[0, 6, 6, 0]} strokeWidth={2}>
               {sortedData.map((entry, index) => {
-                const color = entry.risk >= 70 
-                  ? CHART_COLORS.danger 
-                  : entry.risk >= 40 
-                    ? CHART_COLORS.warning 
-                    : CHART_COLORS.primary;
-                const strokeColor = entry.risk >= 70 
-                  ? CHART_COLORS.dangerDark 
-                  : entry.risk >= 40 
-                    ? CHART_COLORS.warningDark 
-                    : CHART_COLORS.primaryDark;
-                return (
-                  <Cell 
-                    key={`cell-${index}`} 
-                    fill={color} 
-                    stroke={strokeColor}
-                  />
-                );
+                const color =
+                  entry.risk >= 70
+                    ? CHART_COLORS.danger
+                    : entry.risk >= 40
+                      ? CHART_COLORS.warning
+                      : CHART_COLORS.primary;
+                const strokeColor =
+                  entry.risk >= 70
+                    ? CHART_COLORS.dangerDark
+                    : entry.risk >= 40
+                      ? CHART_COLORS.warningDark
+                      : CHART_COLORS.primaryDark;
+                return <Cell key={`cell-${index}`} fill={color} stroke={strokeColor} />;
               })}
               <LabelList
                 dataKey="risk"
@@ -418,8 +379,8 @@ export function SiteRiskChart({ data }: { data: SiteRiskData[] }) {
 
 // Graphique en aire - Tendance du risque
 export function RiskTrendChart({ data }: { data: TrendData[] }) {
-  const maxRisk = Math.max(...data.map(d => d.risk));
-  const minRisk = Math.min(...data.map(d => d.risk));
+  const maxRisk = Math.max(...data.map((d) => d.risk));
+  const minRisk = Math.min(...data.map((d) => d.risk));
 
   return (
     <div className="p-5" style={CARD_STYLE}>
@@ -427,24 +388,19 @@ export function RiskTrendChart({ data }: { data: TrendData[] }) {
         <div className="flex items-center gap-2">
           <Activity className="w-5 h-5" style={{ color: CHART_COLORS.primary }} />
           <div>
-            <h3 
-              className="font-bold text-lg"
-              style={{ color: CHART_COLORS.text }}
-            >
+            <h3 className="font-bold text-lg" style={{ color: CHART_COLORS.text }}>
               Tendance du risque
             </h3>
-            <p 
-              className="text-xs font-semibold"
-              style={{ color: CHART_COLORS.textSecondary }}
-            >
+            <p className="text-xs font-semibold" style={{ color: CHART_COLORS.textSecondary }}>
               Indice moyen toutes parcelles · Aujourd'hui
             </p>
           </div>
         </div>
         <div
           className="px-3 py-1.5 rounded-lg text-sm font-black border-2"
-          style={{ 
-            backgroundColor: maxRisk > 70 ? HIGH_CONTRAST_COLORS.dangerBg : HIGH_CONTRAST_COLORS.warningBg,
+          style={{
+            backgroundColor:
+              maxRisk > 70 ? HIGH_CONTRAST_COLORS.dangerBg : HIGH_CONTRAST_COLORS.warningBg,
             color: maxRisk > 70 ? CHART_COLORS.danger : CHART_COLORS.warning,
             borderColor: maxRisk > 70 ? CHART_COLORS.danger : CHART_COLORS.warning,
           }}
@@ -452,7 +408,7 @@ export function RiskTrendChart({ data }: { data: TrendData[] }) {
           ↗ {maxRisk}% max
         </div>
       </div>
-      
+
       <div className="h-32">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={data}>
@@ -473,23 +429,20 @@ export function RiskTrendChart({ data }: { data: TrendData[] }) {
               dataKey="time"
               axisLine={{ stroke: CHART_COLORS.grid, strokeWidth: 2 }}
               tickLine={{ stroke: CHART_COLORS.grid, strokeWidth: 2 }}
-              tick={{ 
-                fill: CHART_COLORS.textSecondary, 
+              tick={{
+                fill: CHART_COLORS.textSecondary,
                 fontSize: 11,
                 fontWeight: 600,
               }}
             />
-            <YAxis 
-              hide 
-              domain={[0, 100]} 
-            />
-            <ReferenceLine 
-              y={70} 
-              stroke={CHART_COLORS.danger} 
+            <YAxis hide domain={[0, 100]} />
+            <ReferenceLine
+              y={70}
+              stroke={CHART_COLORS.danger}
               strokeDasharray="5 5"
               strokeWidth={2}
-              label={{ 
-                value: 'Critique', 
+              label={{
+                value: 'Critique',
                 position: 'right',
                 fill: CHART_COLORS.danger,
                 fontSize: 10,
@@ -520,42 +473,28 @@ export function SensorRadarChart({ data }: { data: RadarData[] }) {
       <div className="flex items-center gap-2 mb-2">
         <CheckCircle className="w-5 h-5" style={{ color: CHART_COLORS.success }} />
         <div>
-          <h3 
-            className="font-bold text-lg"
-            style={{ color: CHART_COLORS.text }}
-          >
+          <h3 className="font-bold text-lg" style={{ color: CHART_COLORS.text }}>
             Capacité de surveillance
           </h3>
-          <p 
-            className="text-xs font-semibold"
-            style={{ color: CHART_COLORS.textSecondary }}
-          >
+          <p className="text-xs font-semibold" style={{ color: CHART_COLORS.textSecondary }}>
             Couverture par capteur
           </p>
         </div>
       </div>
-      
+
       <div className="h-48">
         <ResponsiveContainer width="100%" height="100%">
           <RadarChart cx="50%" cy="50%" outerRadius="65%" data={data}>
-            <PolarGrid 
-              stroke={CHART_COLORS.grid}
-              strokeWidth={2}
-            />
+            <PolarGrid stroke={CHART_COLORS.grid} strokeWidth={2} />
             <PolarAngleAxis
               dataKey="subject"
-              tick={{ 
-                fill: CHART_COLORS.text, 
+              tick={{
+                fill: CHART_COLORS.text,
                 fontSize: 11,
                 fontWeight: 700,
               }}
             />
-            <PolarRadiusAxis 
-              angle={30} 
-              domain={[0, 100]} 
-              tick={false} 
-              axisLine={false} 
-            />
+            <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
             <Radar
               name="Couverture"
               dataKey="value"

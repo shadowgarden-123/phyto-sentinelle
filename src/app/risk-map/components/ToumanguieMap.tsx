@@ -143,7 +143,7 @@ export default function ToumanguieMap() {
         <LayersControl position="topleft">
           <LayersControl.BaseLayer checked name="Google Earth (Satellite)">
             <TileLayer
-              attribution='&copy; Google'
+              attribution="&copy; Google"
               url="https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}"
               maxZoom={20}
             />
@@ -159,11 +159,7 @@ export default function ToumanguieMap() {
 
         {/* Parcelles (polygones) */}
         {parcelles.map((feature: any, idx: number) => (
-          <GeoJSON
-            key={`parcelle-${idx}`}
-            data={feature}
-            style={parcelleStyle}
-          >
+          <GeoJSON key={`parcelle-${idx}`} data={feature} style={parcelleStyle}>
             <Popup>
               <ParcellePopup feature={feature} />
             </Popup>

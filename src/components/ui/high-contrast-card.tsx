@@ -102,10 +102,7 @@ export function HighContrastCard({
                 </h3>
               )}
               {subtitle && (
-                <p
-                  className="text-sm"
-                  style={{ color: HIGH_CONTRAST_COLORS.textMuted }}
-                >
+                <p className="text-sm" style={{ color: HIGH_CONTRAST_COLORS.textMuted }}>
                   {subtitle}
                 </p>
               )}
@@ -185,17 +182,10 @@ export function HighContrastKPICard({
             className="flex items-center gap-1 text-xs font-bold px-2 py-1 rounded-full"
             style={{
               backgroundColor:
-                trend === 'up'
-                  ? HIGH_CONTRAST_COLORS.dangerBg
-                  : HIGH_CONTRAST_COLORS.successBg,
-              color:
-                trend === 'up'
-                  ? HIGH_CONTRAST_COLORS.danger
-                  : HIGH_CONTRAST_COLORS.success,
+                trend === 'up' ? HIGH_CONTRAST_COLORS.dangerBg : HIGH_CONTRAST_COLORS.successBg,
+              color: trend === 'up' ? HIGH_CONTRAST_COLORS.danger : HIGH_CONTRAST_COLORS.success,
               border: `2px solid ${
-                trend === 'up'
-                  ? HIGH_CONTRAST_COLORS.danger
-                  : HIGH_CONTRAST_COLORS.success
+                trend === 'up' ? HIGH_CONTRAST_COLORS.danger : HIGH_CONTRAST_COLORS.success
               }`,
             }}
           >
@@ -234,11 +224,7 @@ interface BadgeProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
-export function HighContrastBadge({
-  children,
-  variant = 'default',
-  size = 'md',
-}: BadgeProps) {
+export function HighContrastBadge({ children, variant = 'default', size = 'md' }: BadgeProps) {
   const variantStyles = {
     default: {
       bg: HIGH_CONTRAST_COLORS.backgroundSecondary,
@@ -284,9 +270,7 @@ export function HighContrastBadge({
         color: style.text,
       }}
     >
-      {variant === 'danger' && (
-        <span className="w-2 h-2 rounded-full bg-current animate-pulse" />
-      )}
+      {variant === 'danger' && <span className="w-2 h-2 rounded-full bg-current animate-pulse" />}
       {children}
     </span>
   );

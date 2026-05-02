@@ -2,14 +2,7 @@
 
 import React from 'react';
 import { HIGH_CONTRAST_COLORS } from '@/styles/high-contrast-theme';
-import { 
-  AlertTriangle, 
-  CheckCircle, 
-  Info, 
-  XCircle,
-  AlertOctagon,
-  Bell
-} from 'lucide-react';
+import { AlertTriangle, CheckCircle, Info, XCircle, AlertOctagon, Bell } from 'lucide-react';
 
 interface AlertProps {
   children: React.ReactNode;
@@ -76,9 +69,10 @@ export function HighContrastAlert({
       style={{
         backgroundColor: config.bg,
         border: `3px solid ${config.border}`,
-        boxShadow: variant === 'critical' 
-          ? `0 0 0 4px ${config.bg}, 0 20px 25px -5px rgba(220, 38, 38, 0.4)`
-          : `0 0 0 2px ${config.bg}, ${HIGH_CONTRAST_COLORS.shadowLg}`,
+        boxShadow:
+          variant === 'critical'
+            ? `0 0 0 4px ${config.bg}, 0 20px 25px -5px rgba(220, 38, 38, 0.4)`
+            : `0 0 0 2px ${config.bg}, ${HIGH_CONTRAST_COLORS.shadowLg}`,
       }}
     >
       {/* Header avec titre */}
@@ -91,20 +85,12 @@ export function HighContrastAlert({
           }}
         >
           <div className="flex items-center gap-3">
-            <div className="text-white">
-              {icon || config.icon}
-            </div>
-            <span
-              className="font-bold text-lg text-white"
-            >
-              {title}
-            </span>
+            <div className="text-white">{icon || config.icon}</div>
+            <span className="font-bold text-lg text-white">{title}</span>
           </div>
           <div className="flex items-center gap-2">
             {variant === 'critical' && (
-              <span
-                className="px-3 py-1 rounded-full text-xs font-black bg-white text-red-600 animate-pulse"
-              >
+              <span className="px-3 py-1 rounded-full text-xs font-black bg-white text-red-600 animate-pulse">
                 ACTION REQUISE
               </span>
             )}
@@ -119,7 +105,7 @@ export function HighContrastAlert({
           </div>
         </div>
       )}
-      
+
       {/* Corps de l'alerte */}
       <div className="p-5">
         {!title && (
@@ -152,7 +138,7 @@ export function HighContrastAlert({
             )}
           </div>
         )}
-        
+
         {title && (
           <div
             className="text-base font-medium leading-relaxed"
@@ -161,13 +147,9 @@ export function HighContrastAlert({
             {children}
           </div>
         )}
-        
+
         {/* Action button */}
-        {action && (
-          <div className="mt-4 flex justify-end">
-            {action}
-          </div>
-        )}
+        {action && <div className="mt-4 flex justify-end">{action}</div>}
       </div>
     </div>
   );
@@ -211,9 +193,7 @@ export function CriticalAlertBanner({
             <div className="text-white font-black text-2xl">
               {count} ALERTE{count > 1 ? 'S' : ''} CRITIQUE{count > 1 ? 'S' : ''}
             </div>
-            <div className="text-red-100 font-medium">
-              Intervention immédiate requise
-            </div>
+            <div className="text-red-100 font-medium">Intervention immédiate requise</div>
           </div>
         </div>
         <div className="flex items-center gap-3">
@@ -231,7 +211,7 @@ export function CriticalAlertBanner({
           </button>
         </div>
       </div>
-      
+
       {/* Liste des emplacements */}
       <div className="px-6 py-4 bg-black/20">
         <div className="text-white/80 font-semibold mb-2 text-sm uppercase tracking-wide">

@@ -56,7 +56,9 @@ export interface Ravageur {
   nom: string;
   type: string;
   signes_terrain: string[] | { chenilles?: string[]; papillons?: string[] };
-  signatures_capteurs: SignatureCapteur | { chenilles?: SignatureCapteur; papillons?: SignatureCapteur };
+  signatures_capteurs:
+    | SignatureCapteur
+    | { chenilles?: SignatureCapteur; papillons?: SignatureCapteur };
   interpretation: Interpretation;
   detection: DetectionConfig;
   traitements: Traitement[];
@@ -131,11 +133,7 @@ export const RAVAGEURS: Ravageur[] = [
   {
     nom: 'Coelaenomenodera',
     type: 'mineuse des feuilles',
-    signes_terrain: [
-      'feuilles jaunies',
-      'taches brunes',
-      'galeries dans feuilles',
-    ],
+    signes_terrain: ['feuilles jaunies', 'taches brunes', 'galeries dans feuilles'],
     signatures_capteurs: {
       temperature_air: 'elevee',
       humidite_air: 'elevee',
@@ -254,7 +252,12 @@ export function analyzeRavageur(
   if (signature.vibration) {
     facteurs++;
     if (signature.vibration === 'elevee' && sensorData.vibration > 0.5) score += 1;
-    else if (signature.vibration === 'moyenne' && sensorData.vibration >= 0.2 && sensorData.vibration <= 0.5) score += 1;
+    else if (
+      signature.vibration === 'moyenne' &&
+      sensorData.vibration >= 0.2 &&
+      sensorData.vibration <= 0.5
+    )
+      score += 1;
     else if (signature.vibration === 'faible' && sensorData.vibration < 0.2) score += 1;
   }
 
@@ -276,14 +279,24 @@ export function analyzeRavageur(
   if (signature.temperature_air) {
     facteurs++;
     if (signature.temperature_air === 'elevee' && sensorData.temperature_air > 32) score += 1;
-    else if (signature.temperature_air === 'normale' && sensorData.temperature_air >= 24 && sensorData.temperature_air <= 32) score += 1;
+    else if (
+      signature.temperature_air === 'normale' &&
+      sensorData.temperature_air >= 24 &&
+      sensorData.temperature_air <= 32
+    )
+      score += 1;
   }
 
   // Analyse humidité
   if (signature.humidite_air) {
     facteurs++;
     if (signature.humidite_air === 'elevee' && sensorData.humidite_air > 80) score += 1;
-    else if (signature.humidite_air === 'normale' && sensorData.humidite_air >= 50 && sensorData.humidite_air <= 80) score += 1;
+    else if (
+      signature.humidite_air === 'normale' &&
+      sensorData.humidite_air >= 50 &&
+      sensorData.humidite_air <= 80
+    )
+      score += 1;
   }
 
   const probabilite = facteurs > 0 ? score / facteurs : 0;

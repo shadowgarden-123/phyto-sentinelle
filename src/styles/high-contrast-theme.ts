@@ -8,45 +8,45 @@ export const HIGH_CONTRAST_COLORS = {
   background: '#FFFFFF',
   backgroundSecondary: '#F8FAFB',
   backgroundTertiary: '#F1F5F9',
-  
+
   // Texte - Noir pur et nuances pour hiérarchie
   textPrimary: '#000000',
   textSecondary: '#1A1A1A',
   textTertiary: '#334155',
   textMuted: '#64748B',
   textDisabled: '#94A3B8',
-  
+
   // Couleurs PALMCI avec contraste élevé
-  palmciGreen: '#006B3F',      // Vert foncé pour meilleur contraste
+  palmciGreen: '#006B3F', // Vert foncé pour meilleur contraste
   palmciGreenLight: '#009E60', // Vert standard
-  palmciGreenDark: '#004D2C',  // Vert très foncé
-  
-  palmciOrange: '#CC5200',     // Orange foncé
+  palmciGreenDark: '#004D2C', // Vert très foncé
+
+  palmciOrange: '#CC5200', // Orange foncé
   palmciOrangeLight: '#F77F00',
   palmciOrangeDark: '#8B3A00',
-  
+
   // Alertes - Très visibles
-  danger: '#DC2626',           // Rouge vif
+  danger: '#DC2626', // Rouge vif
   dangerDark: '#991B1B',
   dangerBg: '#FEF2F2',
-  
-  warning: '#D97706',          // Jaune/Orange alerte
+
+  warning: '#D97706', // Jaune/Orange alerte
   warningDark: '#92400E',
   warningBg: '#FFFBEB',
-  
+
   success: '#059669',
   successDark: '#065F46',
   successBg: '#ECFDF5',
-  
+
   info: '#0369A1',
   infoDark: '#075985',
   infoBg: '#F0F9FF',
-  
+
   // Bordures
   border: '#E2E8F0',
   borderStrong: '#94A3B8',
   borderFocus: '#000000',
-  
+
   // Ombres subtiles
   shadowSm: '0 1px 2px 0 rgb(0 0 0 / 0.1)',
   shadowMd: '0 4px 6px -1px rgb(0 0 0 / 0.15)',
@@ -119,7 +119,7 @@ export const commonStyles = {
     boxShadow: HIGH_CONTRAST_COLORS.shadowMd,
     padding: '24px',
   },
-  
+
   // Alertes très visibles
   alertCritical: {
     backgroundColor: HIGH_CONTRAST_COLORS.dangerBg,
@@ -128,7 +128,7 @@ export const commonStyles = {
     padding: '20px',
     boxShadow: `0 0 0 4px ${HIGH_CONTRAST_COLORS.dangerBg}, ${HIGH_CONTRAST_COLORS.shadowLg}`,
   },
-  
+
   alertWarning: {
     backgroundColor: HIGH_CONTRAST_COLORS.warningBg,
     border: `3px solid ${HIGH_CONTRAST_COLORS.warning}`,
@@ -136,7 +136,7 @@ export const commonStyles = {
     padding: '20px',
     boxShadow: `0 0 0 4px ${HIGH_CONTRAST_COLORS.warningBg}, ${HIGH_CONTRAST_COLORS.shadowLg}`,
   },
-  
+
   // Boutons haut contraste
   buttonPrimary: {
     backgroundColor: HIGH_CONTRAST_COLORS.palmciGreen,
@@ -147,7 +147,7 @@ export const commonStyles = {
     fontWeight: 600,
     boxShadow: HIGH_CONTRAST_COLORS.shadowSm,
   },
-  
+
   buttonDanger: {
     backgroundColor: HIGH_CONTRAST_COLORS.danger,
     color: '#FFFFFF',
@@ -157,20 +157,20 @@ export const commonStyles = {
     fontWeight: 600,
     boxShadow: HIGH_CONTRAST_COLORS.shadowSm,
   },
-  
+
   // Textes très lisibles
   heading: {
     color: HIGH_CONTRAST_COLORS.textPrimary,
     fontWeight: 700,
     letterSpacing: '-0.01em',
   },
-  
+
   body: {
     color: HIGH_CONTRAST_COLORS.textSecondary,
     fontSize: '14px',
     lineHeight: 1.6,
   },
-  
+
   // Inputs clairs
   input: {
     backgroundColor: HIGH_CONTRAST_COLORS.background,
@@ -198,7 +198,7 @@ export const tailwindConfig = {
       'hc-border': HIGH_CONTRAST_COLORS.border,
     },
     boxShadow: {
-      'hc': HIGH_CONTRAST_COLORS.shadowMd,
+      hc: HIGH_CONTRAST_COLORS.shadowMd,
       'hc-lg': HIGH_CONTRAST_COLORS.shadowLg,
     },
   },

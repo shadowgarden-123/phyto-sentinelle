@@ -97,18 +97,21 @@ export default function LeafletMap({
         className: 'sat-filter', // Optional: CSS filter for sci-fi look
       });
 
-      const darkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '© OpenStreetMap contributors © CARTO',
-        subdomains: 'abcd',
-        maxZoom: 19,
-      });
+      const darkMatter = L.tileLayer(
+        'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+        {
+          attribution: '© OpenStreetMap contributors © CARTO',
+          subdomains: 'abcd',
+          maxZoom: 19,
+        }
+      );
 
       // Default to Dark Futuristic Map
       darkMatter.addTo(map);
 
       const baseMaps = {
-        "Radar Global (Dark)": darkMatter,
-        "Satellite Tactique": googleSat
+        'Radar Global (Dark)': darkMatter,
+        'Satellite Tactique': googleSat,
       };
 
       L.control.layers(baseMaps, undefined, { position: 'topleft' }).addTo(map);
@@ -287,7 +290,7 @@ export default function LeafletMap({
       L.control.attribution({ prefix: false }).addTo(map);
 
       mapInstanceRef.current = map;
-      
+
       // Fix Leaflet tile loading glitch on React mount
       setTimeout(() => {
         map.invalidateSize();

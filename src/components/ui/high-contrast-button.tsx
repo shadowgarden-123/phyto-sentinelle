@@ -90,11 +90,13 @@ export function HighContrastButton({
         color: style.color,
         border: style.border,
         boxShadow: isDisabled ? 'none' : HIGH_CONTRAST_COLORS.shadowSm,
-        ...(isDisabled ? {} : {
-          ':hover': {
-            backgroundColor: style.hoverBg,
-          },
-        }),
+        ...(isDisabled
+          ? {}
+          : {
+              ':hover': {
+                backgroundColor: style.hoverBg,
+              },
+            }),
       }}
       disabled={isDisabled}
       {...props}
@@ -162,9 +164,5 @@ interface ButtonGroupProps {
 }
 
 export function ButtonGroup({ children, className = '' }: ButtonGroupProps) {
-  return (
-    <div className={`flex flex-wrap gap-3 ${className}`}>
-      {children}
-    </div>
-  );
+  return <div className={`flex flex-wrap gap-3 ${className}`}>{children}</div>;
 }

@@ -611,7 +611,9 @@ export default function AlertsScreen() {
               <div className="text-lg font-bold font-tabular" style={{ color: kpi.color }}>
                 {kpi.value}
               </div>
-              <div className="text-[9px] leading-tight" style={{ color: '#5a6b5f' }}>{kpi.label}</div>
+              <div className="text-[9px] leading-tight" style={{ color: '#5a6b5f' }}>
+                {kpi.label}
+              </div>
             </button>
           ))}
         </div>
@@ -619,10 +621,7 @@ export default function AlertsScreen() {
         {/* Search + filter toggle */}
         <div className="flex items-center gap-2">
           <div className="relative flex-1">
-            <Search
-              size={14}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-[#5a6b5f]"
-            />
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#5a6b5f]" />
             <input
               type="text"
               placeholder="Rechercher parcelle, maladie, ID…"
@@ -649,10 +648,7 @@ export default function AlertsScreen() {
             onClick={() => setShowFilters(!showFilters)}
             className="relative flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium transition-all"
             style={{
-              background:
-                showFilters || activeFiltersCount > 0
-                  ? '#f0fdf4'
-                  : '#ffffff',
+              background: showFilters || activeFiltersCount > 0 ? '#f0fdf4' : '#ffffff',
               border: `1px solid ${showFilters || activeFiltersCount > 0 ? '#009E60' : '#d4e0d8'}`,
               color: showFilters || activeFiltersCount > 0 ? '#009E60' : '#5a6b5f',
             }}
@@ -700,7 +696,10 @@ export default function AlertsScreen() {
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {/* Level filter */}
               <div>
-                <label className="block text-[10px] uppercase tracking-widest mb-1.5" style={{ color: '#5a6b5f' }}>
+                <label
+                  className="block text-[10px] uppercase tracking-widest mb-1.5"
+                  style={{ color: '#5a6b5f' }}
+                >
                   Niveau de risque
                 </label>
                 <div className="flex flex-wrap gap-1.5">
@@ -719,8 +718,7 @@ export default function AlertsScreen() {
                       }}
                       className="px-2 py-1 rounded-lg text-[10px] font-medium transition-all"
                       style={{
-                        background:
-                          levelFilter === opt.value ? `${opt.color}15` : '#ffffff',
+                        background: levelFilter === opt.value ? `${opt.color}15` : '#ffffff',
                         border: `1px solid ${levelFilter === opt.value ? opt.color : '#d4e0d8'}`,
                         color: levelFilter === opt.value ? opt.color : '#5a6b5f',
                       }}
@@ -733,7 +731,10 @@ export default function AlertsScreen() {
 
               {/* Source filter */}
               <div>
-                <label className="block text-[10px] uppercase tracking-widest mb-1.5" style={{ color: '#5a6b5f' }}>
+                <label
+                  className="block text-[10px] uppercase tracking-widest mb-1.5"
+                  style={{ color: '#5a6b5f' }}
+                >
                   Source
                 </label>
                 <div className="flex flex-wrap gap-1.5">
@@ -751,10 +752,7 @@ export default function AlertsScreen() {
                       }}
                       className="flex items-center gap-1 px-2 py-1 rounded-lg text-[10px] font-medium transition-all"
                       style={{
-                        background:
-                          sourceFilter === opt.value
-                            ? '#f0fdf4'
-                            : '#ffffff',
+                        background: sourceFilter === opt.value ? '#f0fdf4' : '#ffffff',
                         border: `1px solid ${sourceFilter === opt.value ? '#009E60' : '#d4e0d8'}`,
                         color: sourceFilter === opt.value ? '#009E60' : '#5a6b5f',
                       }}
@@ -768,7 +766,10 @@ export default function AlertsScreen() {
 
               {/* Status filter */}
               <div>
-                <label className="block text-[10px] uppercase tracking-widest mb-1.5" style={{ color: '#5a6b5f' }}>
+                <label
+                  className="block text-[10px] uppercase tracking-widest mb-1.5"
+                  style={{ color: '#5a6b5f' }}
+                >
                   Statut
                 </label>
                 <div className="flex flex-wrap gap-1.5">
@@ -787,10 +788,7 @@ export default function AlertsScreen() {
                       }}
                       className="px-2 py-1 rounded-lg text-[10px] font-medium transition-all"
                       style={{
-                        background:
-                          statusFilter === opt.value
-                            ? '#f0fdf4'
-                            : '#ffffff',
+                        background: statusFilter === opt.value ? '#f0fdf4' : '#ffffff',
                         border: `1px solid ${statusFilter === opt.value ? '#009E60' : '#d4e0d8'}`,
                         color: statusFilter === opt.value ? '#009E60' : '#5a6b5f',
                       }}
@@ -805,7 +803,10 @@ export default function AlertsScreen() {
             <div className="grid grid-cols-2 gap-3">
               {/* Disease filter */}
               <div>
-                <label className="block text-[10px] uppercase tracking-widest mb-1.5" style={{ color: '#5a6b5f' }}>
+                <label
+                  className="block text-[10px] uppercase tracking-widest mb-1.5"
+                  style={{ color: '#5a6b5f' }}
+                >
                   Maladie
                 </label>
                 <div className="relative">
@@ -833,7 +834,10 @@ export default function AlertsScreen() {
 
               {/* Bloc filter */}
               <div>
-                <label className="block text-[10px] uppercase tracking-widest mb-1.5" style={{ color: '#5a6b5f' }}>
+                <label
+                  className="block text-[10px] uppercase tracking-widest mb-1.5"
+                  style={{ color: '#5a6b5f' }}
+                >
                   Bloc
                 </label>
                 <div className="relative">

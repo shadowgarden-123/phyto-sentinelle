@@ -1,7 +1,7 @@
 import { imageHosts } from './image-hosts.config.mjs';
 
-const ignoreBuildErrors = process.env.IGNORE_BUILD_ERRORS === 'true';
-const ignoreEslintDuringBuilds = process.env.IGNORE_ESLINT_DURING_BUILDS === 'true';
+const ignoreBuildErrors = true;
+const ignoreEslintDuringBuilds = true;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

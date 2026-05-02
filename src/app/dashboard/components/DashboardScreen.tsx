@@ -9,7 +9,7 @@ import {
   TreePine,
   Activity,
   Calendar,
-  MapPin
+  MapPin,
 } from 'lucide-react';
 import {
   DiseaseDistributionChart,
@@ -62,7 +62,17 @@ const SENSOR_RADAR_DATA = [
   { subject: 'LoRaWAN', value: 90, fullMark: 100 },
 ];
 
-function SiteCard({ name, risk, statusColor, alerts }: { name: string, risk: number, statusColor: string, alerts: number }) {
+function SiteCard({
+  name,
+  risk,
+  statusColor,
+  alerts,
+}: {
+  name: string;
+  risk: number;
+  statusColor: string;
+  alerts: number;
+}) {
   return (
     <div className="bg-white rounded-xl border border-gray-100 p-3 shadow-sm flex items-center justify-between">
       <div className="flex items-center gap-3">
@@ -121,7 +131,9 @@ function KPICard({
         {value}
         {unit && <span className="text-sm font-semibold text-gray-400 ml-1">{unit}</span>}
       </div>
-      <div className="text-[11px] font-semibold text-gray-500 mt-0.5 uppercase tracking-wide">{title}</div>
+      <div className="text-[11px] font-semibold text-gray-500 mt-0.5 uppercase tracking-wide">
+        {title}
+      </div>
       {sub && (
         <div className="text-[10px] font-bold mt-1" style={{ color }}>
           {sub}
@@ -139,28 +151,31 @@ export default function DashboardScreen() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="font-extrabold text-gray-900 text-lg">Tableau de bord</h1>
-            <p className="text-[11px] font-medium text-gray-500 uppercase tracking-wide mt-0.5">Vue globale · Mai 2026</p>
+            <p className="text-[11px] font-medium text-gray-500 uppercase tracking-wide mt-0.5">
+              Vue globale · Mai 2026
+            </p>
           </div>
           <div className="flex items-center gap-1.5 text-[11px] text-[#009E60] bg-green-50 px-3 py-1.5 rounded-xl border border-green-100 font-bold">
             <Calendar size={12} />
-            <span>Aujourd'hui</span>
+            <span>Aujourd&apos;hui</span>
           </div>
         </div>
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-6 pb-24">
-        
         {/* Sites Section */}
         <section>
           <div className="flex items-center gap-1.5 mb-3">
             <MapPin size={14} className="text-gray-400" />
-            <h2 className="text-xs font-bold text-gray-500 uppercase tracking-widest">Sites PALMCI</h2>
+            <h2 className="text-xs font-bold text-gray-500 uppercase tracking-widest">
+              Sites PALMCI
+            </h2>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <SiteCard name="Ehania" risk={85} alerts={7} statusColor="bg-red-500" />
             <SiteCard name="Toumaguié" risk={78} alerts={4} statusColor="bg-orange-500" />
             <SiteCard name="Iboké" risk={55} alerts={3} statusColor="bg-yellow-500" />
-            <SiteCard name="N'eka" risk={48} alerts={2} statusColor="bg-[#009E60]" />
+            <SiteCard name="N&apos;eka" risk={48} alerts={2} statusColor="bg-[#009E60]" />
           </div>
         </section>
 
@@ -168,7 +183,9 @@ export default function DashboardScreen() {
         <section>
           <div className="flex items-center gap-1.5 mb-3">
             <Activity size={14} className="text-gray-400" />
-            <h2 className="text-xs font-bold text-gray-500 uppercase tracking-widest">Performances</h2>
+            <h2 className="text-xs font-bold text-gray-500 uppercase tracking-widest">
+              Performances
+            </h2>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <KPICard

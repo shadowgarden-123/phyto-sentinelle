@@ -74,7 +74,10 @@ export default function RiskMapScreen() {
           }}
         >
           <Activity size={12} style={{ color: '#00e5ff' }} />
-          <span className="font-tabular" style={{ color: '#00e5ff', textShadow: '0 0 8px rgba(0,229,255,0.5)' }}>
+          <span
+            className="font-tabular"
+            style={{ color: '#00e5ff', textShadow: '0 0 8px rgba(0,229,255,0.5)' }}
+          >
             {phytoboxOnline}/{phytoboxTotal}
           </span>
           <span className="text-[#00e5ff] hidden sm:inline opacity-80">PhytoBox</span>
@@ -91,7 +94,12 @@ export default function RiskMapScreen() {
           }}
         >
           <Bell size={12} style={{ color: '#ef4444' }} />
-          <span className="font-tabular" style={{ color: '#ef4444', textShadow: '0 0 8px rgba(239,68,68,0.5)' }}>{unreadAlerts}</span>
+          <span
+            className="font-tabular"
+            style={{ color: '#ef4444', textShadow: '0 0 8px rgba(239,68,68,0.5)' }}
+          >
+            {unreadAlerts}
+          </span>
           <span className="text-[#ef4444] hidden sm:inline opacity-80">Alertes</span>
           <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#ef4444] shadow-[0_0_8px_#ef4444]" />
         </Link>
@@ -178,11 +186,11 @@ export default function RiskMapScreen() {
       {/* Last updated */}
       <div
         className="absolute bottom-[68px] left-3 z-[300] flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest"
-        style={{ 
-          background: 'rgba(15, 23, 42, 0.75)', 
+        style={{
+          background: 'rgba(15, 23, 42, 0.75)',
           backdropFilter: 'blur(8px)',
-          border: '1px solid rgba(0, 229, 255, 0.15)', 
-          color: '#94a3b8' 
+          border: '1px solid rgba(0, 229, 255, 0.15)',
+          color: '#94a3b8',
         }}
       >
         <Wifi size={10} style={{ color: '#00e5ff' }} />
@@ -283,21 +291,31 @@ function ParcelDrawer({ parcelId, onClose }: ParcelDrawerProps) {
         <div className="flex items-start justify-between mb-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <TreePine size={16} style={{ color: '#00e5ff', filter: 'drop-shadow(0 0 4px #00e5ff)' }} />
-              <h3 className="text-base font-bold uppercase tracking-wider" style={{ color: '#e2e8f0', textShadow: '0 0 10px rgba(255,255,255,0.2)' }}>{data.name}</h3>
+              <TreePine
+                size={16}
+                style={{ color: '#00e5ff', filter: 'drop-shadow(0 0 4px #00e5ff)' }}
+              />
+              <h3
+                className="text-base font-bold uppercase tracking-wider"
+                style={{ color: '#e2e8f0', textShadow: '0 0 10px rgba(255,255,255,0.2)' }}
+              >
+                {data.name}
+              </h3>
               <span
                 className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded"
                 style={{
                   background: `${riskColor}15`,
                   color: riskColor,
                   border: `1px solid ${riskColor}40`,
-                  boxShadow: `inset 0 0 8px ${riskColor}20`
+                  boxShadow: `inset 0 0 8px ${riskColor}20`,
                 }}
               >
                 {riskLabel}
               </span>
             </div>
-            <p className="text-xs text-slate-400 tracking-wide">{data.bloc} · Site Ehania-Toumaguié</p>
+            <p className="text-xs text-slate-400 tracking-wide">
+              {data.bloc} · Site Ehania-Toumaguié
+            </p>
           </div>
           <button
             onClick={onClose}
@@ -311,12 +329,23 @@ function ParcelDrawer({ parcelId, onClose }: ParcelDrawerProps) {
         {/* Risk gauge */}
         <div className="mb-4">
           <div className="flex items-center justify-between mb-1.5">
-            <span className="text-xs text-slate-400 uppercase tracking-widest font-bold">Niveau de Menace</span>
-            <span className="text-lg font-bold font-tabular" style={{ color: riskColor, textShadow: `0 0 10px ${riskColor}80` }}>
+            <span className="text-xs text-slate-400 uppercase tracking-widest font-bold">
+              Niveau de Menace
+            </span>
+            <span
+              className="text-lg font-bold font-tabular"
+              style={{ color: riskColor, textShadow: `0 0 10px ${riskColor}80` }}
+            >
               {data.risk}%
             </span>
           </div>
-          <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.05)', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.5)' }}>
+          <div
+            className="h-2 rounded-full overflow-hidden"
+            style={{
+              background: 'rgba(255,255,255,0.05)',
+              boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.5)',
+            }}
+          >
             <div
               className="h-full rounded-full transition-all duration-500"
               style={{
@@ -356,11 +385,18 @@ function ParcelDrawer({ parcelId, onClose }: ParcelDrawerProps) {
               style={{
                 background: 'rgba(255,255,255,0.02)',
                 borderColor: 'rgba(255,255,255,0.05)',
-                boxShadow: 'inset 0 0 15px rgba(0,0,0,0.2)'
+                boxShadow: 'inset 0 0 15px rgba(0,0,0,0.2)',
               }}
             >
-              <div className="text-lg font-bold font-tabular" style={{ color: stat.color, textShadow: `0 0 8px ${stat.color}60` }}>{stat.value}</div>
-              <div className="text-[9px] text-slate-500 uppercase tracking-widest mt-1">{stat.unit}</div>
+              <div
+                className="text-lg font-bold font-tabular"
+                style={{ color: stat.color, textShadow: `0 0 8px ${stat.color}60` }}
+              >
+                {stat.value}
+              </div>
+              <div className="text-[9px] text-slate-500 uppercase tracking-widest mt-1">
+                {stat.unit}
+              </div>
               <div className="text-[10px] text-slate-400 font-bold tracking-wide">{stat.label}</div>
             </div>
           ))}
@@ -372,13 +408,21 @@ function ParcelDrawer({ parcelId, onClose }: ParcelDrawerProps) {
           style={{
             background: 'rgba(239, 68, 68, 0.1)',
             border: '1px solid rgba(239, 68, 68, 0.3)',
-            boxShadow: 'inset 0 0 15px rgba(239,68,68,0.1)'
+            boxShadow: 'inset 0 0 15px rgba(239,68,68,0.1)',
           }}
         >
           <div className="flex items-center gap-3">
-            <AlertTriangle size={16} style={{ color: '#ef4444', filter: 'drop-shadow(0 0 4px #ef4444)' }} />
+            <AlertTriangle
+              size={16}
+              style={{ color: '#ef4444', filter: 'drop-shadow(0 0 4px #ef4444)' }}
+            />
             <div>
-              <div className="text-xs font-bold uppercase tracking-wide" style={{ color: '#ef4444', textShadow: '0 0 8px rgba(239,68,68,0.5)' }}>{data.disease}</div>
+              <div
+                className="text-xs font-bold uppercase tracking-wide"
+                style={{ color: '#ef4444', textShadow: '0 0 8px rgba(239,68,68,0.5)' }}
+              >
+                {data.disease}
+              </div>
               <div className="text-[9px] text-red-200/60 uppercase tracking-widest mt-0.5">
                 Scan: {data.lastInspection}
               </div>
@@ -386,7 +430,12 @@ function ParcelDrawer({ parcelId, onClose }: ParcelDrawerProps) {
           </div>
           <div className="text-right border-l border-red-500/20 pl-3">
             <div className="text-[9px] text-red-200/60 uppercase tracking-widest">pH Sol</div>
-            <div className="text-sm font-bold font-tabular" style={{ color: '#F59820', textShadow: '0 0 8px rgba(245,152,32,0.5)' }}>{data.ph}</div>
+            <div
+              className="text-sm font-bold font-tabular"
+              style={{ color: '#F59820', textShadow: '0 0 8px rgba(245,152,32,0.5)' }}
+            >
+              {data.ph}
+            </div>
           </div>
         </div>
 
@@ -399,7 +448,7 @@ function ParcelDrawer({ parcelId, onClose }: ParcelDrawerProps) {
               background: 'rgba(239, 68, 68, 0.15)',
               border: '1px solid rgba(239, 68, 68, 0.4)',
               color: '#ef4444',
-              boxShadow: 'inset 0 0 10px rgba(239,68,68,0.1)'
+              boxShadow: 'inset 0 0 10px rgba(239,68,68,0.1)',
             }}
           >
             Déclencher Alerte
@@ -407,10 +456,11 @@ function ParcelDrawer({ parcelId, onClose }: ParcelDrawerProps) {
           <button
             className="flex-1 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all hover:brightness-125 active:scale-[0.97]"
             style={{
-              background: 'linear-gradient(135deg, rgba(0,229,255,0.8) 0%, rgba(0,158,96,0.8) 100%)',
+              background:
+                'linear-gradient(135deg, rgba(0,229,255,0.8) 0%, rgba(0,158,96,0.8) 100%)',
               border: '1px solid rgba(0,229,255,0.4)',
               color: '#ffffff',
-              boxShadow: '0 0 15px rgba(0,229,255,0.3)'
+              boxShadow: '0 0 15px rgba(0,229,255,0.3)',
             }}
           >
             Scan Détaillé

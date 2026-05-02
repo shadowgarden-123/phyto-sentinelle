@@ -51,7 +51,7 @@ export default function BottomNav({ role = 'CPI', alertCount = 0 }: BottomNavPro
     },
     {
       id: 'assistant',
-      label: "Assistant",
+      label: 'Assistant',
       icon: <MessageSquare size={20} />,
       href: '/assistant',
     },
@@ -100,9 +100,7 @@ export default function BottomNav({ role = 'CPI', alertCount = 0 }: BottomNavPro
               `}
             >
               {active && (
-                <span
-                  className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 rounded-full bg-[#009E60]"
-                />
+                <span className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 rounded-full bg-[#009E60]" />
               )}
 
               <span className="relative">

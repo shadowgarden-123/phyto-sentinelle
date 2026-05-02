@@ -51,14 +51,14 @@ export default function MapControls({
   ];
 
   return (
-    <div 
+    <div
       className="flex flex-col gap-2 p-2 rounded-xl"
       style={{
         background: 'rgba(15, 23, 42, 0.75)',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
         border: '1px solid rgba(0, 229, 255, 0.15)',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 0 16px rgba(0,229,255,0.05)'
+        boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 0 16px rgba(0,229,255,0.05)',
       }}
     >
       {controls.map((ctrl) => (
@@ -75,17 +75,23 @@ export default function MapControls({
             minWidth: '110px',
             textTransform: 'uppercase',
             letterSpacing: '1px',
-            boxShadow: ctrl.active ? `0 0 12px ${ctrl.activeColor}30, inset 0 0 8px ${ctrl.activeColor}20` : 'none',
+            boxShadow: ctrl.active
+              ? `0 0 12px ${ctrl.activeColor}30, inset 0 0 8px ${ctrl.activeColor}20`
+              : 'none',
           }}
         >
           {ctrl.icon}
-          <span style={{ textShadow: ctrl.active ? `0 0 8px ${ctrl.activeColor}80` : 'none' }}>{ctrl.label}</span>
+          <span style={{ textShadow: ctrl.active ? `0 0 8px ${ctrl.activeColor}80` : 'none' }}>
+            {ctrl.label}
+          </span>
           <div
             className="ml-auto w-1.5 h-1.5 rounded-full transition-all duration-300"
-            style={{ 
+            style={{
               background: ctrl.active ? ctrl.activeColor : 'rgba(255,255,255,0.1)',
-              boxShadow: ctrl.active ? `0 0 8px ${ctrl.activeColor}, 0 0 12px ${ctrl.activeColor}` : 'none' 
-            }} 
+              boxShadow: ctrl.active
+                ? `0 0 8px ${ctrl.activeColor}, 0 0 12px ${ctrl.activeColor}`
+                : 'none',
+            }}
           />
         </button>
       ))}

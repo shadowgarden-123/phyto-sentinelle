@@ -26,14 +26,14 @@ import {
 
 // Couleurs PALMCI - Vert Orange Blanc (Côte d'Ivoire)
 const COLORS = {
-  primary: '#009E60',      // Vert PALMCI
+  primary: '#009E60', // Vert PALMCI
   primaryLight: '#00B86E', // Vert clair
-  danger: '#ff4444',       // Rouge vif
-  dangerDark: '#CC0000',   // Rouge sombre
-  warning: '#F77F00',      // Orange PALMCI
+  danger: '#ff4444', // Rouge vif
+  dangerDark: '#CC0000', // Rouge sombre
+  warning: '#F77F00', // Orange PALMCI
   warningLight: '#FF9500', // Orange clair
-  info: '#FFD700',         // Or/Doré
-  white: '#FFFFFF',        // Blanc
+  info: '#FFD700', // Or/Doré
+  white: '#FFFFFF', // Blanc
   surface: '#dcfce7',
   surfaceOrange: '#fef3c7',
   grid: '#d4e0d8',
@@ -167,10 +167,7 @@ export function DiseaseDistributionChart({ data }: { data: DiseaseData[] }) {
             <div key={i}>
               <div className="flex items-center justify-between mb-1">
                 <span className="text-xs text-palm-200 flex items-center gap-2">
-                  <span
-                    className="w-2 h-2 rounded-full"
-                    style={{ background: d.color }}
-                  />
+                  <span className="w-2 h-2 rounded-full" style={{ background: d.color }} />
                   {d.name}
                 </span>
                 <span className="text-[11px] font-bold font-tabular" style={{ color: d.color }}>
@@ -201,15 +198,24 @@ export function WeeklyAlertsChart({ data }: { data: AlertData[] }) {
         <h3 className="text-sm font-semibold text-foreground">Alertes — 7 derniers jours</h3>
         <div className="flex items-center gap-3 text-[10px]">
           <span className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-sm" style={{ background: COLORS.danger, boxShadow: '0 0 4px rgba(255,68,68,0.5)' }} />
+            <span
+              className="w-2 h-2 rounded-sm"
+              style={{ background: COLORS.danger, boxShadow: '0 0 4px rgba(255,68,68,0.5)' }}
+            />
             <span className="text-red-400">Nouvelles</span>
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-sm" style={{ background: COLORS.primary, boxShadow: '0 0 4px rgba(0,158,96,0.5)' }} />
+            <span
+              className="w-2 h-2 rounded-sm"
+              style={{ background: COLORS.primary, boxShadow: '0 0 4px rgba(0,158,96,0.5)' }}
+            />
             <span className="text-green-400">Résolues</span>
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-sm" style={{ background: COLORS.warning, boxShadow: '0 0 4px rgba(247,127,0,0.5)' }} />
+            <span
+              className="w-2 h-2 rounded-sm"
+              style={{ background: COLORS.warning, boxShadow: '0 0 4px rgba(247,127,0,0.5)' }}
+            />
             <span className="text-orange-400">Critiques</span>
           </span>
         </div>
@@ -272,11 +278,7 @@ export function SiteRiskChart({ data }: { data: SiteRiskData[] }) {
             layout="vertical"
             margin={{ top: 0, right: 40, bottom: 0, left: 60 }}
           >
-            <CartesianGrid
-              strokeDasharray="3 3"
-              stroke={COLORS.grid}
-              horizontal={false}
-            />
+            <CartesianGrid strokeDasharray="3 3" stroke={COLORS.grid} horizontal={false} />
             <XAxis type="number" hide />
             <YAxis
               type="category"
@@ -287,18 +289,14 @@ export function SiteRiskChart({ data }: { data: SiteRiskData[] }) {
               width={55}
             />
             <Tooltip content={<CustomTooltip />} />
-            <Bar
-              dataKey="risk"
-              name="Risque"
-              radius={[0, 4, 4, 0]}
-              animationDuration={1000}
-            >
+            <Bar dataKey="risk" name="Risque" radius={[0, 4, 4, 0]} animationDuration={1000}>
               {sortedData.map((entry, index) => {
-                const color = entry.risk >= 60 
-                  ? COLORS.danger 
-                  : entry.risk >= 40 
-                    ? COLORS.warning 
-                    : COLORS.primary;
+                const color =
+                  entry.risk >= 60
+                    ? COLORS.danger
+                    : entry.risk >= 40
+                      ? COLORS.warning
+                      : COLORS.primary;
                 return <Cell key={`cell-${index}`} fill={color} />;
               })}
             </Bar>
@@ -315,14 +313,17 @@ export function RiskTrendChart({ data }: { data: TrendData[] }) {
       <div className="flex items-center justify-between mb-4">
         <div>
           <h3 className="text-sm font-semibold text-foreground">Tendance du risque</h3>
-          <p className="text-[10px] text-muted-foreground">Indice moyen toutes parcelles · Aujourd'hui</p>
+          <p className="text-[10px] text-muted-foreground">
+            Indice moyen toutes parcelles · Aujourd&apos;hui
+          </p>
         </div>
         <div
           className="px-2 py-1 rounded-lg text-[10px] font-medium"
-          style={{ 
-            background: 'linear-gradient(135deg, rgba(255,68,68,0.2) 0%, rgba(247,127,0,0.15) 100%)', 
+          style={{
+            background:
+              'linear-gradient(135deg, rgba(255,68,68,0.2) 0%, rgba(247,127,0,0.15) 100%)',
             color: COLORS.danger,
-            border: '1px solid rgba(255,68,68,0.3)'
+            border: '1px solid rgba(255,68,68,0.3)',
           }}
         >
           ↗ 72% peak
@@ -380,10 +381,7 @@ export function SensorRadarChart({ data }: { data: RadarData[] }) {
         <ResponsiveContainer width="100%" height="100%">
           <RadarChart cx="50%" cy="50%" outerRadius="70%" data={data}>
             <PolarGrid stroke={COLORS.grid} />
-            <PolarAngleAxis
-              dataKey="subject"
-              tick={{ fill: '#5a6b5f', fontSize: 9 }}
-            />
+            <PolarAngleAxis dataKey="subject" tick={{ fill: '#5a6b5f', fontSize: 9 }} />
             <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
             <Radar
               name="Couverture"

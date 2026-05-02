@@ -55,11 +55,18 @@ export default function SiteSelector({ selectedSite, onSiteChange }: SiteSelecto
           boxShadow: 'inset 0 0 10px rgba(0,229,255,0.05)',
         }}
       >
-        <MapPin size={13} className="text-[#00e5ff]" style={{ filter: 'drop-shadow(0 0 4px #00e5ff)' }} />
+        <MapPin
+          size={13}
+          className="text-[#00e5ff]"
+          style={{ filter: 'drop-shadow(0 0 4px #00e5ff)' }}
+        />
         <span className="text-[#e2e8f0] max-w-[120px] sm:max-w-none truncate">
           {currentSite.name}
         </span>
-        <span className="text-xs font-bold font-tabular" style={{ color: riskColor, textShadow: `0 0 8px ${riskColor}80` }}>
+        <span
+          className="text-xs font-bold font-tabular"
+          style={{ color: riskColor, textShadow: `0 0 8px ${riskColor}80` }}
+        >
           {currentSite.riskIndex}%
         </span>
         <ChevronDown
@@ -101,12 +108,12 @@ export default function SiteSelector({ selectedSite, onSiteChange }: SiteSelecto
                 `}
               >
                 <div className="flex items-center gap-3">
-                  <div 
-                    className="w-1.5 h-1.5 rounded-full" 
-                    style={{ 
+                  <div
+                    className="w-1.5 h-1.5 rounded-full"
+                    style={{
                       background: isSelected ? '#00e5ff' : 'transparent',
-                      boxShadow: isSelected ? '0 0 8px #00e5ff' : 'none'
-                    }} 
+                      boxShadow: isSelected ? '0 0 8px #00e5ff' : 'none',
+                    }}
                   />
                   <div>
                     <div
@@ -124,10 +131,17 @@ export default function SiteSelector({ selectedSite, onSiteChange }: SiteSelecto
                   <div className="h-1.5 w-10 rounded-full overflow-hidden bg-slate-800">
                     <div
                       className="h-full rounded-full"
-                      style={{ width: `${site.riskIndex}%`, background: siteRiskColor, boxShadow: `0 0 8px ${siteRiskColor}` }}
+                      style={{
+                        width: `${site.riskIndex}%`,
+                        background: siteRiskColor,
+                        boxShadow: `0 0 8px ${siteRiskColor}`,
+                      }}
                     />
                   </div>
-                  <span className="text-xs font-bold font-tabular w-8 text-right" style={{ color: siteRiskColor }}>
+                  <span
+                    className="text-xs font-bold font-tabular w-8 text-right"
+                    style={{ color: siteRiskColor }}
+                  >
                     {site.riskIndex}%
                   </span>
                 </div>
