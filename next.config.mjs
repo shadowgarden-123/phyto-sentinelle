@@ -15,8 +15,8 @@ const nextConfig = {
   },
   // Ensure trailing slashes for correct static routing
   trailingSlash: true,
-  // Base path for GitHub Pages (uncomment and set to your repo name if needed)
-  // basePath: '/phytobox_palmci_v2',
+  // Base path for GitHub Pages
+  basePath: '/phyto-sentinelle',
   
   productionBrowserSourceMaps: true,
   distDir: process.env.DIST_DIR || '.next',
